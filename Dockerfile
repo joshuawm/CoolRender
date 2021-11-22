@@ -1,5 +1,6 @@
 from ubuntu
-Run apt update -y && apt install git
+ENV DEBIAN_FRONTEND=noninteractive
+Run apt update -y && apt install git sudo curl tzdata -y
 RUN curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
 RUN npx corepack enable
 WORKDIR /root/
