@@ -23,9 +23,23 @@ class PWRender {
     GetRender(url) {
         return __awaiter(this, void 0, void 0, function* () {
             let page = yield this.browser.newPage();
-            yield page.goto(url);
-            let content = yield page.content();
-            return content;
+            let content;
+            let status;
+            try {
+                yield page.goto(url);
+                content = yield page.content();
+                status = 200;
+            }
+            catch (_a) {
+                content = "Load failed (1) Check the url correct (2)Maybe the server go Wrong";
+                status = 400;
+            }
+            yield page.close();
+            let response = {
+                status,
+                content
+            };
+            return response;
         });
     }
     checkURL(url) {
@@ -42,7 +56,10 @@ class PWRender {
                 return yield this.GetRender(url);
             }
             else {
-                return "Wrong URL in the query";
+                return {
+                    status: 400,
+                    content: " "
+                };
             }
         });
     }

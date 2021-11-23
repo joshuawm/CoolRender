@@ -6,6 +6,6 @@ Run apt update -y && apt install git sudo curl tzdata -y && \
 WORKDIR /root/
 RUN git clone https://github.com/joshuawm/CoolRender.git
 WORKDIR /root/CoolRender
-RUN yarn && npx playwright install-deps webkit
+RUN yarn && yarn playwright install-deps webkit
 CMD yarn run start
 EXPOSE 3000
